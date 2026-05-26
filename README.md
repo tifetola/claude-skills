@@ -111,6 +111,107 @@ The `/write-content` master skill orchestrates all phases in sequence. Every sub
 
 ---
 
+## SEO Topic Research Pipeline
+
+The `/topic-research` master skill runs all 7 phases in sequence from account understanding to a prioritized, brief-ready content roadmap. Each phase is also available as a standalone skill.
+
+```
+/topic-research <client-domain>
+       │
+       ├── Phase 1: Business Context (2 sources in parallel)
+       │       ├── 1A. Website crawl + /business-context   → account intelligence document
+       │       └── 1B. Ahrefs site metrics + GSC data      → DR, top pages, current rankings
+       │                   ↓ [User approval checkpoint]
+       ├── Phase 2: Opportunity Extraction
+       │       └── /opportunity-extraction  → 7 opportunity types: competitor, objection,
+       │                                      feature, use-case, industry, pain, winner expansion
+       │                   ↓ [User approval checkpoint]
+       ├── Phase 3: Keyword Validation
+       │       └── /keyword-validation  → Ahrefs matching terms, related terms, volume + KD
+       │                                  per opportunity (Ahrefs comes in HERE, not first)
+       │
+       ├── Phase 4: SERP Qualification
+       │       └── /serp-qualification  → live SERP check per candidate
+       │                                  QUALIFY / CONDITIONAL / KILL verdicts
+       │                                  (many topics die here — that's the point)
+       │
+       ├── Phase 5: Business Fit Filter
+       │       └── /business-fit-filter → 5 gates: pipeline alignment, ICP match,
+       │                                  product fit, client alignment, cannibalization check
+       │
+       ├── Phase 6: Topic Shaping
+       │       └── /topic-shaping  → format decision per topic: alternatives page,
+       │                             comparison, LP, vertical LP, feature page, use case, etc.
+       │
+       └── Phase 7: Prioritization
+               └── /topic-prioritization → 6-dimension scoring, 3-tier output,
+                                           sequenced build queue
+```
+
+### Master Pipeline
+
+| Skill | Invocation | Description |
+|---|---|---|
+| **Topic Research** | `/topic-research <domain>` | Full 7-phase pipeline. Account understanding → opportunity angles → keyword validation → SERP qualification → commercial filtering → format decisions → prioritized roadmap. |
+
+---
+
+### Phase 1 — Business Context
+
+| Skill | Invocation | Description |
+|---|---|---|
+| **Business Context** | `/business-context <domain>` | Builds the Account Intelligence Document from website crawl, Ahrefs data, call transcripts, onboarding forms, and client comms. Covers ICP, competitors, objections, commercial priorities, what already works, and what to avoid. |
+
+---
+
+### Phase 2 — Opportunity Extraction
+
+| Skill | Invocation | Description |
+|---|---|---|
+| **Opportunity Extraction** | `/opportunity-extraction` | Extracts content opportunity angles from account intelligence. Seven types: competitor-led, objection-led, feature-led, use-case-led, industry-led, pain-led, and winner expansion. Not keywords yet — business angles. |
+
+---
+
+### Phase 3 — Keyword Validation
+
+| Skill | Invocation | Description |
+|---|---|---|
+| **Keyword Validation** | `/keyword-validation` | Validates opportunity angles against real search demand using Ahrefs. Pulls matching terms, related terms, volume, KD, and competitor keyword gaps per opportunity cluster. Ahrefs validates here — it doesn't set strategy. |
+
+---
+
+### Phase 4 — SERP Qualification
+
+| Skill | Invocation | Description |
+|---|---|---|
+| **SERP Qualification** | `/serp-qualification` | Checks what actually ranks for each keyword candidate via live search and Ahrefs SERP overview. Assigns QUALIFY / CONDITIONAL / KILL verdicts based on intent clarity, competitive landscape, format signals, and whether rankings are beatable. |
+
+---
+
+### Phase 5 — Business Fit Filter
+
+| Skill | Invocation | Description |
+|---|---|---|
+| **Business Fit Filter** | `/business-fit-filter` | Applies the commercial gate. Five filters: pipeline alignment, ICP match, product fit, client alignment, and cannibalization check. Passes each keyword as NEW / UPDATE / CANNIBALIZES. Harsh by design. |
+
+---
+
+### Phase 6 — Topic Shaping
+
+| Skill | Invocation | Description |
+|---|---|---|
+| **Topic Shaping** | `/topic-shaping` | Assigns the correct content format to every surviving topic: alternatives page, comparison, category LP, vertical LP, feature page, use case page, pricing page, implementation guide, pain-solution article, etc. Flags architecture implications. |
+
+---
+
+### Phase 7 — Prioritization
+
+| Skill | Invocation | Description |
+|---|---|---|
+| **Topic Prioritization** | `/topic-prioritization` | Scores every topic across 6 dimensions (commercial intent, ICP alignment, ranking feasibility, content effort, existing authority, adjacency to wins) and produces a 3-tier prioritized build queue with sequencing rationale. |
+
+---
+
 ## Installation
 
 These are [Claude Code](https://claude.ai/code) custom skills. To use them:
